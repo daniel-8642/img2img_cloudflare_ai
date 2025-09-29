@@ -1,22 +1,15 @@
 <script setup>
 import {onMounted} from "vue";
 import Text2Img from "./components/Text2Img.vue";
-
+import availableModels from "./assets/AvailableModels.json"
+import randomPromptsList from "./assets/randomPromptsList.json"
 
 // 初始化模型列表
-let availableModels = [];
-let randomPromptsList = [];
 let currentImageParams = {};
 
 // 加载模型列表
 async function loadModels() {
   try {
-    const response = await fetch('/api/models');
-    if (!response.ok) {
-      throw new Error('加载模型列表失败');
-    }
-
-    availableModels = await response.json();
     const modelSelect = document.getElementById('model');
 
     // 清空当前选项
