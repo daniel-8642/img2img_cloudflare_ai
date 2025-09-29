@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
-let isOpen= ref(false);
-
+const isOpen= ref(false);
+const width= ref(1024);
+const height= ref(1024);
+const num_steps= ref(20);
+const guidance= ref(7.5);
 </script>
 
 <template>
@@ -23,9 +26,10 @@ let isOpen= ref(false);
           <label for="width" class="block text-sm font-medium flex items-center">
             <i class="fa-solid fa-arrows-left-right mr-1 text-xs"></i> 图像宽度
           </label>
-          <span id="widthValue" class="text-sm font-mono">1024px</span>
+          <span class="text-sm font-mono">{{ width }}px</span>
         </div>
-        <input type="range" id="width" min="256" max="2048" step="64" value="1024" class="slider w-full">
+        <input type="range" id="width" min="256" max="2048" step="64"
+               v-model="width" class="slider w-full">
       </div>
 
       <div>
@@ -33,9 +37,10 @@ let isOpen= ref(false);
           <label for="height" class="block text-sm font-medium flex items-center">
             <i class="fa-solid fa-arrows-up-down mr-1 text-xs"></i> 图像高度
           </label>
-          <span id="heightValue" class="text-sm font-mono">1024px</span>
+          <span class="text-sm font-mono">{{ height }}px</span>
         </div>
-        <input type="range" id="height" min="256" max="2048" step="64" value="1024" class="slider w-full">
+        <input type="range" min="256" max="2048" step="64"
+               v-model="height" class="slider w-full">
       </div>
 
       <div>
@@ -44,9 +49,10 @@ let isOpen= ref(false);
             <i class="fa-solid fa-shoe-prints mr-1 text-xs"></i> 迭代步数
             <span class="tooltiptext">更高的步数通常会产生更精细的细节，但需要更长的处理时间</span>
           </label>
-          <span id="num_stepsValue" class="text-sm font-mono">20</span>
+          <span class="text-sm font-mono">{{ num_steps }}</span>
         </div>
-        <input type="range" id="num_steps" min="1" max="20" step="1" value="20" class="slider w-full">
+        <input type="range" min="1" max="20" step="1"
+               v-model="num_steps" class="slider w-full">
       </div>
 
       <div>
@@ -55,9 +61,10 @@ let isOpen= ref(false);
             <i class="fa-solid fa-compass mr-1 text-xs"></i> 引导系数
             <span class="tooltiptext">控制生成图像与提示词的匹配程度，较高的值会更严格遵循提示词</span>
           </label>
-          <span id="guidanceValue" class="text-sm font-mono">7.5</span>
+          <span class="text-sm font-mono">{{ parseFloat(guidance).toFixed(2) }}</span>
         </div>
-        <input type="range" id="guidance" min="0" max="30" step="0.5" value="7.5" class="slider w-full">
+        <input type="range" min="0" max="30" step="0.01"
+               v-model="guidance" class="slider w-full">
       </div>
 
       <div>

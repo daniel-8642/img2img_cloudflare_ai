@@ -44,24 +44,6 @@ function showStatus(message, type = 'info') {
 
 
 onMounted(() => {
-
-  // 滑块值显示
-  const sliders = ['width', 'height', 'num_steps', 'guidance'];
-  sliders.forEach(id => {
-    const slider = document.getElementById(id);
-    const valueDisplay = document.getElementById(`${id}Value`);
-
-    slider.addEventListener('input', function () {
-      if (id === 'width' || id === 'height') {
-        valueDisplay.textContent = `${this.value}px`;
-      } else if (id === 'guidance') {
-        valueDisplay.textContent = parseFloat(this.value).toFixed(2);
-      } else {
-        valueDisplay.textContent = this.value;
-      }
-    });
-  });
-
   // 随机种子
   document.getElementById('randomSeed').addEventListener('click', function () {
     const randomSeed = Math.floor(Math.random() * 4294967295);
