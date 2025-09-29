@@ -44,6 +44,7 @@ function showStatus(message, type = 'info') {
 
 
 onMounted(() => {
+
   // 滑块值显示
   const sliders = ['width', 'height', 'num_steps', 'guidance'];
   sliders.forEach(id => {

@@ -6,8 +6,8 @@ let isOpen= ref(false);
 </script>
 
 <template>
-  <div class="card p-4 space-y-4 fade-in" @click="isOpen=!isOpen">
-    <div class="flex justify-between items-center">
+  <div class="card p-4 space-y-4 fade-in" >
+    <div class="flex justify-between items-center" @click="isOpen=!isOpen">
       <h2 class="text-lg font-semibold flex items-center">
         <i class="fa-solid fa-gear mr-2 text-primary"></i>
         高级选项
