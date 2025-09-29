@@ -3,9 +3,11 @@ import {onMounted} from "vue";
 import Text2Img from "./components/Text2Img.vue";
 import availableModels from "./assets/AvailableModels.json"
 import randomPromptsList from "./assets/randomPromptsList.json"
+import {useSettingStore} from "./stores/setting.js";
 
 // 初始化模型列表
 let currentImageParams = {};
+const setting = useSettingStore()
 
 // 加载模型列表
 async function loadModels() {
@@ -33,20 +35,6 @@ async function loadModels() {
   }
 }
 
-// 加载随机提示词
-async function loadRandomPrompts() {
-  try {
-    const response = await fetch('/api/prompts');
-    if (!response.ok) {
-      throw new Error('加载提示词失败');
-    }
-
-    randomPromptsList = await response.json();
-  } catch (error) {
-    console.error('加载提示词错误:', error);
-    randomPromptsList = ['未能加载提示词列表，请重试或手动输入'];
-  }
-}
 
 // 显示状态提示
 function showStatus(message, type = 'info') {
@@ -80,43 +68,7 @@ function showStatus(message, type = 'info') {
     statusElement.classList.add('hidden');
   }, 5000)
 }
-
 onMounted(() => {
-  // 初始化加载资源
-  loadModels();
-  loadRandomPrompts();
-
-  // 主题切换功能相关代码
-  const themeToggle = document.getElementById('themeToggle');
-  const html = document.documentElement;
-  const moonIcon = `<i class="fa-solid fa-moon"></i>`;
-  const sunIcon = `<i class="fa-solid fa-sun"></i>`;
-
-  // 检查系统主题或存储的主题并设置初始状态
-  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    html.classList.add('dark');
-    themeToggle.innerHTML = sunIcon;
-    themeToggle.setAttribute('aria-label', '切换亮色主题');
-  } else {
-    html.classList.remove('dark');
-    themeToggle.innerHTML = moonIcon;
-    themeToggle.setAttribute('aria-label', '切换暗色主题');
-  }
-
-  themeToggle.addEventListener('click', function () {
-    if (html.classList.contains('dark')) {
-      html.classList.remove('dark');
-      localStorage.theme = 'light';
-      themeToggle.innerHTML = moonIcon;
-      themeToggle.setAttribute('aria-label', '切换暗色主题');
-    } else {
-      html.classList.add('dark');
-      localStorage.theme = 'dark';
-      themeToggle.innerHTML = sunIcon;
-      themeToggle.setAttribute('aria-label', '切换亮色主题');
-    }
-  });
-
   // 高级选项切换
   const toggleAdvanced = document.getElementById('toggleAdvanced');
   const advancedOptions = document.getElementById('advancedOptions');
@@ -408,9 +360,9 @@ onMounted(() => {
         🐳&nbsp;在线文生图服务
       </h1>
       <div class="flex items-center space-x-2">
-        <button id="themeToggle" class="btn btn-secondary p-2 h-10 w-10 flex items-center justify-center"
-                aria-label="切换暗色主题">
-          <i class="fa-solid fa-moon"></i>
+        <button class="btn btn-secondary p-2 h-10 w-10 flex items-center justify-center"
+                :aria-label="setting.theme==='dark'? '切换亮色主题':'切换暗色主题'" @click="setting.switchTheme()">
+          <i :class="setting.theme==='light'?'fa-solid fa-moon':'fa-solid fa-sun'"></i>
         </button>
         <button id="github" class="btn btn-secondary p-2 h-10 w-10 flex items-center justify-center"
                 aria-label="项目地址"
