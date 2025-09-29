@@ -1,7 +1,18 @@
 <script setup lang="ts">
 import {useSettingStore} from "../stores/setting.js";
+import randomPromptsList from "../assets/randomPromptsList.json"
+import {ref} from "vue";
 
 const models = useSettingStore().availableModels
+const prompt = ref("cyberpunk cat")
+function randomButton() {
+  if (randomPromptsList.length > 0) {
+    const randomIndex = Math.floor(Math.random() * randomPromptsList.length);
+    prompt.value = randomPromptsList[randomIndex];
+  } else {
+    // showStatus('提示词列表未加载，请稍后再试', 'error');  todo: 编写全局提示函数
+  }
+}
 </script>
 
 <template>
@@ -11,7 +22,7 @@ const models = useSettingStore().availableModels
         <i class="fa-solid fa-sliders mr-2 text-primary"></i>
         基本设置
       </h2>
-      <button id="randomButton" class="btn btn-secondary text-sm py-1 px-3 flex items-center">
+      <button class="btn btn-secondary text-sm py-1 px-3 flex items-center" @click="randomButton">
         <i class="fa-solid fa-dice mr-1"></i> 随机提示词
       </button>
     </div>
@@ -27,8 +38,8 @@ const models = useSettingStore().availableModels
       <label for="prompt" class="block text-sm font-medium mb-1 flex items-center">
         <i class="fa-solid fa-wand-magic-sparkles mr-1 text-xs"></i> 正向提示词
       </label>
-      <textarea id="prompt" rows="3" placeholder="描述您想要生成的图像内容及样式..."
-                class="w-full">cyberpunk cat</textarea>
+      <textarea rows="3" placeholder="描述您想要生成的图像内容及样式..."
+                class="w-full">{{ prompt }}</textarea>
     </div>
 
     <div>

@@ -1,7 +1,6 @@
 <script setup>
 import {onMounted} from "vue";
 import Text2Img from "./components/Text2Img.vue";
-import randomPromptsList from "./assets/randomPromptsList.json"
 import {useSettingStore} from "./stores/setting.js";
 
 // 初始化模型列表
@@ -44,21 +43,7 @@ function showStatus(message, type = 'info') {
 
 
 onMounted(() => {
-  // 随机种子
-  document.getElementById('randomSeed').addEventListener('click', function () {
-    const randomSeed = Math.floor(Math.random() * 4294967295);
-    document.getElementById('seed').value = randomSeed;
-  });
 
-  // 随机提示词
-  document.getElementById('randomButton').addEventListener('click', function () {
-    if (randomPromptsList.length > 0) {
-      const randomIndex = Math.floor(Math.random() * randomPromptsList.length);
-      document.getElementById('prompt').value = randomPromptsList[randomIndex];
-    } else {
-      showStatus('提示词列表未加载，请稍后再试', 'error');
-    }
-  });
 
   // 复制参数
   document.getElementById('copyParamsButton').addEventListener('click', function () {

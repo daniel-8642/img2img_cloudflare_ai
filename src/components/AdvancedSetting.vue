@@ -6,6 +6,7 @@ const width= ref(1024);
 const height= ref(1024);
 const num_steps= ref(20);
 const guidance= ref(7.5);
+const seed = ref(null);
 </script>
 
 <template>
@@ -73,8 +74,8 @@ const guidance= ref(7.5);
           <span class="tooltiptext">使用相同的种子值可以在其他参数相同的情况下生成相似的图像</span>
         </label>
         <div class="flex gap-2">
-          <input type="number" id="seed" placeholder="随机种子值" class="w-full">
-          <button id="randomSeed" class="btn btn-secondary text-sm py-1 px-3">
+          <input type="number" id="seed" placeholder="随机种子值" class="w-full" v-model="seed">
+          <button id="randomSeed" class="btn btn-secondary text-sm py-1 px-3" @click="seed = Math.floor(Math.random() * 4294967295)">
             <i class="fa-solid fa-random"></i>
           </button>
         </div>
