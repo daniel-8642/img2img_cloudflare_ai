@@ -1,20 +1,23 @@
 <script setup lang="ts">
+import {ref} from "vue";
+
+let isOpen= ref(false);
 
 </script>
 
 <template>
-  <div class="card p-4 space-y-4 fade-in">
+  <div class="card p-4 space-y-4 fade-in" @click="isOpen=!isOpen">
     <div class="flex justify-between items-center">
       <h2 class="text-lg font-semibold flex items-center">
         <i class="fa-solid fa-gear mr-2 text-primary"></i>
         高级选项
       </h2>
-      <button id="toggleAdvanced" class="text-xs btn btn-secondary py-1 px-3 flex items-center">
-        <i class="fa-solid fa-chevron-down mr-1" id="advancedIcon"></i> 显示/隐藏
+      <button class="text-xs btn btn-secondary py-1 px-3 flex items-center">
+        <i class="fa-solid mr-1" :class="isOpen?'fa-chevron-up':'fa-chevron-down'"></i> 显示/隐藏
       </button>
     </div>
 
-    <div id="advancedOptions" class="space-y-3 hidden">
+    <div class="space-y-3" :class="isOpen?'':'hidden'">
       <div>
         <div class="flex justify-between items-center">
           <label for="width" class="block text-sm font-medium flex items-center">

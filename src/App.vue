@@ -8,6 +8,7 @@ import {useSettingStore} from "./stores/setting.js";
 let currentImageParams = {};
 const setting = useSettingStore()
 
+
 // 显示状态提示
 function showStatus(message, type = 'info') {
   const statusElement = document.getElementById('imageStatus');
@@ -40,24 +41,9 @@ function showStatus(message, type = 'info') {
     statusElement.classList.add('hidden');
   }, 5000)
 }
+
+
 onMounted(() => {
-  // 高级选项切换
-  const toggleAdvanced = document.getElementById('toggleAdvanced');
-  const advancedOptions = document.getElementById('advancedOptions');
-  const advancedIcon = document.getElementById('advancedIcon');
-
-  toggleAdvanced.addEventListener('click', function () {
-    if (advancedOptions.classList.contains('hidden')) {
-      advancedOptions.classList.remove('hidden');
-      advancedIcon.classList.remove('fa-chevron-down');
-      advancedIcon.classList.add('fa-chevron-up');
-    } else {
-      advancedOptions.classList.add('hidden');
-      advancedIcon.classList.remove('fa-chevron-up');
-      advancedIcon.classList.add('fa-chevron-down');
-    }
-  });
-
   // 滑块值显示
   const sliders = ['width', 'height', 'num_steps', 'guidance'];
   sliders.forEach(id => {

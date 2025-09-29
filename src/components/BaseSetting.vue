@@ -2,7 +2,6 @@
 import {useSettingStore} from "../stores/setting.js";
 
 const models = useSettingStore().availableModels
-console.log(models)
 </script>
 
 <template>
