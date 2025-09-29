@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import {useSettingStore} from "../stores/setting.js";
 
+const models = useSettingStore().availableModels
+console.log(models)
 </script>
 
 <template>
@@ -42,7 +45,9 @@
         <i class="fa-solid fa-robot mr-1 text-xs"></i> 文生图模型
       </label>
       <select id="model" class="w-full">
-        <option value="loading" disabled selected>加载中...</option>
+        <option v-for="(item, index) in models" :value="item.id" :selected="index === 1">
+          {{ item.name }} - {{ item.description }}
+        </option>
       </select>
     </div>
   </div>

@@ -1,40 +1,12 @@
 <script setup>
 import {onMounted} from "vue";
 import Text2Img from "./components/Text2Img.vue";
-import availableModels from "./assets/AvailableModels.json"
 import randomPromptsList from "./assets/randomPromptsList.json"
 import {useSettingStore} from "./stores/setting.js";
 
 // 初始化模型列表
 let currentImageParams = {};
 const setting = useSettingStore()
-
-// 加载模型列表
-async function loadModels() {
-  try {
-    const modelSelect = document.getElementById('model');
-
-    // 清空当前选项
-    modelSelect.innerHTML = '';
-
-    // 添加新选项
-    availableModels.forEach(model => {
-      const option = document.createElement('option');
-      option.value = model.id;
-      option.textContent = `${model.name} - ${model.description}`;
-      modelSelect.appendChild(option);
-    });
-
-    // 默认选择第二个模型（通常是更好的模型）
-    if (availableModels.length > 1) {
-      modelSelect.value = availableModels[1].id;
-    }
-  } catch (error) {
-    console.error('加载模型列表错误:', error);
-    showStatus('加载模型列表失败', 'error');
-  }
-}
-
 
 // 显示状态提示
 function showStatus(message, type = 'info') {
