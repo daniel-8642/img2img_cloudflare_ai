@@ -421,7 +421,7 @@ onMounted(() => {
         </button>
         <button id="github" class="btn btn-secondary p-2 h-10 w-10 flex items-center justify-center"
                 aria-label="项目地址"
-                onclick="window.open('https://github.com/huarzone/Text2img-Cloudflare-Workers', '_blank')">
+                onclick="window.open('https://github.com/daniel-8642/img2img_cloudflare_ai', '_blank')">
           <i class="fa-brands fa-github"></i>
         </button>
       </div>

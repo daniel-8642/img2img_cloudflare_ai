@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import BaseSetting from "./BaseSetting.vue";
 import AdvancedSetting from "./AdvancedSetting.vue";
 </script>
