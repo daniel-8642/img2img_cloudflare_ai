@@ -38,7 +38,7 @@ function randomButton() {
       <label for="prompt" class="block text-sm font-medium mb-1 flex items-center">
         <i class="fa-solid fa-wand-magic-sparkles mr-1 text-xs"></i> 正向提示词
       </label>
-      <textarea rows="3" placeholder="描述您想要生成的图像内容及样式..."
+      <textarea id="prompt" rows="3" placeholder="描述您想要生成的图像内容及样式..."
                 class="w-full">{{ prompt }}</textarea>
     </div>
 

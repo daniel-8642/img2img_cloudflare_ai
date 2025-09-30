@@ -40,7 +40,7 @@ const seed = ref(null);
           </label>
           <span class="text-sm font-mono">{{ height }}px</span>
         </div>
-        <input type="range" min="256" max="2048" step="64"
+        <input type="range" id="height" min="256" max="2048" step="64"
                v-model="height" class="slider w-full">
       </div>
 
@@ -52,7 +52,7 @@ const seed = ref(null);
           </label>
           <span class="text-sm font-mono">{{ num_steps }}</span>
         </div>
-        <input type="range" min="1" max="20" step="1"
+        <input type="range" id="num_steps" min="1" max="20" step="1"
                v-model="num_steps" class="slider w-full">
       </div>
 
@@ -64,7 +64,7 @@ const seed = ref(null);
           </label>
           <span class="text-sm font-mono">{{ parseFloat(guidance).toFixed(2) }}</span>
         </div>
-        <input type="range" min="0" max="30" step="0.01"
+        <input type="range" id="guidance" min="0" max="30" step="0.01"
                v-model="guidance" class="slider w-full">
       </div>
 
