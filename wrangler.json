@@ -1,0 +1,24 @@
+{
+  "name" : "img2img-ai",
+  "compatibility_date" : "2025-09-24",
+  "main" : "./worker.js",
+  "secrets_store_secrets": [
+    {
+      "binding": "passwd",
+      "store_id": "fae3c0b7ea3a4bf380e048a384afa9e7",
+      "secret_name": "passwd"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "ai": {
+    "binding": "AI"
+  }
+}
