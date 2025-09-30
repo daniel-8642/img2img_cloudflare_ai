@@ -1,5 +1,5 @@
 // 密码验证配置
-const PASSWORDS = env.passwd;
+const PASSWORDS = JSON.parse(env.passwd)?JSON.parse(env.passwd):[];
 const AVAILABLE_MODELS = require('./config/AvailableModels.json');
 
 export default {
