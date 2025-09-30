@@ -1,10 +1,8 @@
-// 密码验证配置
-const PASSWORDS = JSON.parse(env.passwd)?JSON.parse(env.passwd):[];
-const AVAILABLE_MODELS = require('./config/AvailableModels.json');
-
 export default {
     async fetch(request, env) {
-        const originalHost = request.headers.get("host");
+        // 密码验证配置
+        const PASSWORDS = JSON.parse(this.env.passwd)?JSON.parse(this.env.passwd):[];
+        const AVAILABLE_MODELS = require('./config/AvailableModels.json');
 
         // CORS Headers
         const corsHeaders = {
