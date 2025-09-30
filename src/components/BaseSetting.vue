@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useSettingStore} from "../stores/setting.js";
-import randomPromptsList from "../assets/RandomPromptsList.json"
+import randomPromptsList from "../../config/RandomPromptsList.json"
 import {ref} from "vue";
 
 const models = useSettingStore().availableModels

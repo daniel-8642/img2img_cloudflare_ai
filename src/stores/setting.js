@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia'
 import {ref, watch} from "vue";
-import availableModelsT from "../assets/AvailableModels.json"
+import availableModelsT from "../../config/AvailableModels.json"
 
 export const useSettingStore =
     defineStore('setting', () => {

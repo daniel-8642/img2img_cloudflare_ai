@@ -1,5 +1,6 @@
 // 密码验证配置
 const PASSWORDS = [];
+const AVAILABLE_MODELS = require('./config/AvailableModels.json');
 
 export default {
     async fetch(request, env) {
