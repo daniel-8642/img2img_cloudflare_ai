@@ -1,7 +1,7 @@
 export default {
     async fetch(request, env) {
         // 密码验证配置
-        const PASSWORDS = ['123456789'];
+        const PASSWORDS = [await env.passwd.get()];
         const AVAILABLE_MODELS = require('./config/AvailableModels.json');
 
         // CORS Headers
