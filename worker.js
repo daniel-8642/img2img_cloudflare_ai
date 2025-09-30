@@ -1,7 +1,8 @@
 export default {
     async fetch(request, env) {
         // 密码验证配置
-        const PASSWORDS = JSON.parse(this.env.passwd)?JSON.parse(this.env.passwd):[];
+        const PASSWORDS = [env.passwd];
+        console.log(JSON.stringify(PASSWORDS));
         const AVAILABLE_MODELS = require('./config/AvailableModels.json');
 
         // CORS Headers
