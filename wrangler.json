@@ -19,6 +19,7 @@
     "run_worker_first": true
   },
   "ai": {
-    "binding": "AI"
+    "binding": "AI",
+    "remote": true
   }
 }
