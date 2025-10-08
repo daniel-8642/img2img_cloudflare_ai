@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {useSettingStore} from "../stores/setting.js";
+import {useMessage, useSettingStore} from "./stores/setting.js";
 import randomPromptsList from "../../config/RandomPromptsList.json"
 import {ref} from "vue";
 
+const msg = useMessage();
 const models = useSettingStore().availableModels
 const prompt = ref("cyberpunk cat")
 function randomButton() {
@@ -10,7 +11,7 @@ function randomButton() {
     const randomIndex = Math.floor(Math.random() * randomPromptsList.length);
     prompt.value = randomPromptsList[randomIndex];
   } else {
-    // showStatus('提示词列表未加载，请稍后再试', 'error');  todo: 编写全局提示函数
+    msg.showStatus('提示词列表未加载，请稍后再试', 'error');  todo: 编写全局提示函数
   }
 }
 </script>

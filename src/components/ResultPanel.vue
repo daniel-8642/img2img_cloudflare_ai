@@ -1,5 +1,7 @@
-<script setup lang="ts">
+<script setup>
+import {useMessage, useSettingStore} from "../stores/setting.js";
 
+const msg = useMessage();
 </script>
 
 <template>
@@ -32,7 +34,7 @@
           <i class="fa-solid fa-image-portrait text-4xl mb-2"></i>
           <p>点击生成按钮开始创建图像</p>
         </div>
-        <span id="imageStatus" class="bg-gray-300 text-gray-700 hidden">状态</span>
+        <span id="imageStatus" :class="msg.statusStyle">{{ msg.message }}</span>
         <img id="aiImage" class="max-h-full max-w-full rounded hidden" alt="生成的图像">
       </div>
 

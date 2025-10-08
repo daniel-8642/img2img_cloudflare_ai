@@ -1,50 +1,15 @@
 <script setup>
 import {onMounted} from "vue";
 import Text2Img from "./components/Text2Img.vue";
-import {useSettingStore} from "./stores/setting.js";
+import {useMessage, useSettingStore} from "./stores/setting.js";
 
 // 初始化模型列表
 let currentImageParams = {};
 const setting = useSettingStore()
-
-
-// 显示状态提示
-function showStatus(message, type = 'info') {
-  const statusElement = document.getElementById('imageStatus');
-  if (!statusElement) return;
-
-  // 设置样式
-  statusElement.className = '';
-  switch (type) {
-    case 'success':
-      statusElement.classList.add('bg-green-100', 'text-green-800', 'dark:bg-green-900', 'dark:text-green-100');
-      break;
-    case 'error':
-      statusElement.classList.add('bg-red-100', 'text-red-800', 'dark:bg-red-900', 'dark:text-red-100');
-      break;
-    case 'warning':
-      statusElement.classList.add('bg-yellow-100', 'text-yellow-800', 'dark:bg-yellow-900', 'dark:text-yellow-100');
-      break;
-    default:
-      statusElement.classList.add('bg-blue-100', 'text-blue-800', 'dark:bg-blue-900', 'dark:text-blue-100');
-  }
-
-  // 设置消息
-  statusElement.textContent = message;
-
-  // 显示
-  statusElement.classList.remove('hidden');
-
-  // 5秒后自动隐藏
-  setTimeout(() => {
-    statusElement.classList.add('hidden');
-  }, 5000)
-}
+const msg = useMessage();
 
 
 onMounted(() => {
-
-
   // 复制参数
   document.getElementById('copyParamsButton').addEventListener('click', function () {
     if (!currentImageParams) return;
@@ -59,11 +24,11 @@ onMounted(() => {
     // 复制到剪贴板
     navigator.clipboard.writeText(paramsText)
         .then(() => {
-          showStatus('参数已复制到剪贴板', 'success');
+          msg.showStatus('参数已复制到剪贴板', 'success');
         })
         .catch(err => {
           console.error('复制失败:', err);
-          showStatus('复制参数失败', 'error');
+           msg.showStatus('复制参数失败', 'error');
         });
   });
 
@@ -86,7 +51,7 @@ onMounted(() => {
   document.getElementById('downloadButton').addEventListener('click', async function () {
     const img = document.getElementById('aiImage');
     if (!img.src) {
-      showStatus('没有可下载的图像', 'error');
+       msg.showStatus('没有可下载的图像', 'error');
       return;
     }
 
@@ -113,10 +78,10 @@ onMounted(() => {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      showStatus('图像下载成功', 'success');
+       msg.showStatus('图像下载成功', 'success');
     } catch (error) {
       console.error('下载图像错误:', error);
-      showStatus('下载图像失败', 'error');
+       msg.showStatus('下载图像失败', 'error');
     }
   });
 
@@ -216,14 +181,14 @@ onMounted(() => {
         updateParamsDisplay(params);
 
         // 显示状态和操作按钮
-        showStatus('生成成功', 'success');
+         msg.showStatus('生成成功', 'success');
         if (copyParamsButton) copyParamsButton.classList.remove('hidden');
         if (downloadButton) downloadButton.classList.remove('hidden');
       };
 
     } catch (error) {
       console.error('生成图像错误:', error);
-      showStatus(error.message || '生成失败', 'error');
+       msg.showStatus(error.message || '生成失败', 'error');
       // 显示初始提示
       initialPrompt.classList.remove('hidden');
       aiImage.classList.add('hidden');
