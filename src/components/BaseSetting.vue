@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useMessage, useSettingStore} from "./stores/setting.js";
+import {useMessage, useSettingStore} from "../stores/setting.js";
 import randomPromptsList from "../../config/RandomPromptsList.json"
 import {ref} from "vue";
 
